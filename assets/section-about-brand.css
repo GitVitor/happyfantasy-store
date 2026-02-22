@@ -29,18 +29,18 @@
   letter-spacing: 0.15em;
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--hf-lavender, #C8A8D8);
+  color: var(--hf-lavender, #c8a8d8);
 }
 
 .about-brand__heading {
   margin: 0;
-  color: var(--hf-plum, #4A3347);
+  color: var(--hf-plum, #4a3347);
 }
 
 .about-brand__text {
   font-size: 1rem;
   line-height: 1.8;
-  color: var(--hf-plum-light, #6B5068);
+  color: var(--hf-plum-light, #6b5068);
 }
 
 .about-brand__text p {
@@ -58,7 +58,7 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: linear-gradient(135deg, var(--hf-mint, #A8D5BA), #7EC8A0);
+  background: linear-gradient(135deg, var(--hf-mint, #a8d5ba), #7ec8a0);
   color: #fff !important;
   font-weight: 700;
   font-size: 1rem;
@@ -75,7 +75,7 @@
 .about-brand__button:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 28px rgba(168, 213, 186, 0.55);
-  background: linear-gradient(135deg, #7EC8A0, var(--hf-mint, #A8D5BA));
+  background: linear-gradient(135deg, #7ec8a0, var(--hf-mint, #a8d5ba));
 }
 
 .about-brand__media {
@@ -99,7 +99,7 @@
 }
 
 .about-brand__placeholder {
-  background: var(--hf-mint-light, #E8F5EE);
+  background: var(--hf-mint-light, #e8f5ee);
   border-radius: 20px;
   aspect-ratio: 4 / 3;
   display: flex;

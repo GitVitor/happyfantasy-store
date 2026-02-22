@@ -4,16 +4,16 @@
    Global Homepage Variables
    =========================== */
 :root {
-  --hf-pink: #F5B8C8;
-  --hf-pink-light: #FDF0F4;
-  --hf-mint: #A8D5BA;
-  --hf-mint-light: #E8F5EE;
-  --hf-lavender: #C8A8D8;
-  --hf-lavender-light: #F3ECF8;
-  --hf-plum: #4A3347;
-  --hf-plum-light: #6B5068;
-  --hf-off-white: #FFFBF7;
-  --hf-yellow: #FFD966;
+  --hf-pink: #f5b8c8;
+  --hf-pink-light: #fdf0f4;
+  --hf-mint: #a8d5ba;
+  --hf-mint-light: #e8f5ee;
+  --hf-lavender: #c8a8d8;
+  --hf-lavender-light: #f3ecf8;
+  --hf-plum: #4a3347;
+  --hf-plum-light: #6b5068;
+  --hf-off-white: #fffbf7;
+  --hf-yellow: #ffd966;
   --hf-radius: 16px;
   --hf-shadow: 0 4px 24px rgba(74, 51, 71, 0.08);
   --hf-shadow-lg: 0 8px 40px rgba(74, 51, 71, 0.12);
@@ -79,11 +79,21 @@ html {
 
 /* Float animation for decorative elements */
 @keyframes hf-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 @keyframes hf-pulse {
-  0%, 100% { opacity: 0.6; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
 }

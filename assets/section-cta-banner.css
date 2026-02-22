@@ -22,7 +22,7 @@
   letter-spacing: 0.15em;
   font-size: 0.8rem;
   font-weight: 700;
-  color: var(--hf-pink, #F5B8C8);
+  color: var(--hf-pink, #f5b8c8);
 }
 
 .cta-banner__heading {
@@ -64,15 +64,15 @@
 }
 
 .cta-banner__button.button--primary {
-  background: linear-gradient(135deg, #FFD966, #FFB84D);
-  color: var(--hf-plum, #4A3347) !important;
+  background: linear-gradient(135deg, #ffd966, #ffb84d);
+  color: var(--hf-plum, #4a3347) !important;
   box-shadow: 0 4px 20px rgba(255, 217, 102, 0.4);
 }
 
 .cta-banner__button.button--primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 28px rgba(255, 217, 102, 0.55);
-  background: linear-gradient(135deg, #FFB84D, #FFD966);
+  background: linear-gradient(135deg, #ffb84d, #ffd966);
 }
 
 .cta-banner__button.button--secondary {
@@ -110,6 +110,11 @@
 }
 
 @keyframes hf-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }

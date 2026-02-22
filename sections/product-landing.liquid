@@ -24,8 +24,64 @@
           </div>
 
           <div class="pl-hero__actions">
-            {%- form 'product', product -%}
+            {%- form 'product', product, id: 'pl-form-hero' -%}
               <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+              {%- comment -%} ===== PERSONALIZAÇÃO ===== {%- endcomment -%}
+              <div class="pl-personalize" id="pl-personalize">
+                <div class="pl-personalize__header">
+                  <span class="pl-personalize__icon">🎨</span>
+                  <h3 class="pl-personalize__title">Personalize Seu Vídeo ✨</h3>
+                  <p class="pl-personalize__subtitle">Preencha os dados para criar a magia!</p>
+                </div>
+
+                <div class="pl-personalize__fields">
+                  <div class="pl-personalize__field">
+                    <label for="pl-child-name">
+                      🧒 Nome da Criança <abbr title="obrigatório">*</abbr>
+                    </label>
+                    <input
+                      type="text"
+                      id="pl-child-name"
+                      name="properties[Nome da Criança]"
+                      placeholder="Ex: Sofia"
+                      required
+                      autocomplete="off"
+                      maxlength="40"
+                    >
+                  </div>
+
+                  <div class="pl-personalize__field">
+                    <label for="pl-flavor">
+                      🍫 Sabor Favorito do Ovo <abbr title="obrigatório">*</abbr>
+                    </label>
+                    <select id="pl-flavor" name="properties[Sabor Favorito]" required>
+                      <option value="" disabled selected>Escolha o sabor...</option>
+                      <option value="Chocolate ao Leite">🤎 Chocolate ao Leite</option>
+                      <option value="Chocolate Branco">🤍 Chocolate Branco</option>
+                      <option value="Chocolate Amargo">🖤 Chocolate Amargo</option>
+                      <option value="Outros">🌈 Outros</option>
+                    </select>
+                  </div>
+
+                  <div class="pl-personalize__field">
+                    <label for="pl-whatsapp">
+                      📱 WhatsApp para Entrega <abbr title="obrigatório">*</abbr>
+                    </label>
+                    <input
+                      type="tel"
+                      id="pl-whatsapp"
+                      name="properties[WhatsApp]"
+                      placeholder="(11) 99999-9999"
+                      required
+                      autocomplete="tel"
+                      maxlength="20"
+                      pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}"
+                    >
+                  </div>
+                </div>
+              </div>
+
               <button type="submit" class="pl-btn pl-btn--lg" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
                 <span>{{ section.settings.hero_cta_text }}</span>
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -203,8 +259,11 @@
         {{ section.settings.urgency_countdown_text }}
       </div>
 
-      {%- form 'product', product -%}
+      {%- form 'product', product, id: 'pl-form-urgency' -%}
         <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <input type="hidden" name="properties[Nome da Criança]" id="pl-urgency-name" value="">
+        <input type="hidden" name="properties[Sabor Favorito]" id="pl-urgency-flavor" value="">
+        <input type="hidden" name="properties[WhatsApp]" id="pl-urgency-whatsapp" value="">
         <button type="submit" class="pl-btn pl-btn--lg" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
           <span>{{ section.settings.urgency_cta_text }}</span>
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -219,6 +278,167 @@
   </section>
 
 </div>
+
+<style>
+  /* ===== Personalization Section ===== */
+  .pl-personalize {
+    background: linear-gradient(135deg, #fff0f5 0%, #f5f0ff 100%);
+    border: 2px solid #f5d5e0;
+    border-radius: 20px;
+    padding: 1.5rem;
+    margin-bottom: 1.2rem;
+    width: 100%;
+  }
+
+  .pl-personalize__header {
+    text-align: center;
+    margin-bottom: 1.2rem;
+  }
+
+  .pl-personalize__icon {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.3rem;
+  }
+
+  .pl-personalize__title {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #4A3347;
+    margin: 0 0 0.3rem;
+  }
+
+  .pl-personalize__subtitle {
+    font-size: 0.85rem;
+    color: #6B5068;
+    margin: 0;
+  }
+
+  .pl-personalize__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .pl-personalize__field label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #4A3347;
+    margin-bottom: 0.4rem;
+  }
+
+  .pl-personalize__field label abbr {
+    color: #e75480;
+    text-decoration: none;
+    font-weight: 400;
+  }
+
+  .pl-personalize__field input,
+  .pl-personalize__field select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid #e8d5f0;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    color: #4A3347;
+    background: #fff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    -webkit-appearance: none;
+    appearance: none;
+    box-sizing: border-box;
+  }
+
+  .pl-personalize__field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' fill='none' stroke='%236B5068' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+
+  .pl-personalize__field input:focus,
+  .pl-personalize__field select:focus {
+    outline: none;
+    border-color: #C8A8D8;
+    box-shadow: 0 0 0 3px rgba(200, 168, 216, 0.25);
+  }
+
+  .pl-personalize__field input::placeholder {
+    color: #b8a0c0;
+  }
+
+  .pl-personalize__field input:invalid:not(:placeholder-shown) {
+    border-color: #e75480;
+  }
+
+  .pl-personalize__field input:valid:not(:placeholder-shown) {
+    border-color: #A8D5BA;
+  }
+
+  @media screen and (min-width: 750px) {
+    .pl-personalize {
+      padding: 1.8rem 2rem;
+    }
+  }
+</style>
+
+<script>
+  (function() {
+    /* WhatsApp mask: (XX) XXXXX-XXXX */
+    const whatsInput = document.getElementById('pl-whatsapp');
+    if (whatsInput) {
+      whatsInput.addEventListener('input', function(e) {
+        let v = e.target.value.replace(/\D/g, '').slice(0, 11);
+        if (v.length > 6) {
+          v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+        } else if (v.length > 2) {
+          v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+        } else if (v.length > 0) {
+          v = '(' + v;
+        }
+        e.target.value = v;
+      });
+    }
+
+    /* Sync hero fields → urgency hidden inputs */
+    const nameInput = document.getElementById('pl-child-name');
+    const flavorInput = document.getElementById('pl-flavor');
+    const urgName = document.getElementById('pl-urgency-name');
+    const urgFlavor = document.getElementById('pl-urgency-flavor');
+    const urgWhatsapp = document.getElementById('pl-urgency-whatsapp');
+
+    function syncFields() {
+      if (urgName) urgName.value = nameInput ? nameInput.value : '';
+      if (urgFlavor) urgFlavor.value = flavorInput ? flavorInput.value : '';
+      if (urgWhatsapp) urgWhatsapp.value = whatsInput ? whatsInput.value : '';
+    }
+
+    if (nameInput) nameInput.addEventListener('input', syncFields);
+    if (flavorInput) flavorInput.addEventListener('change', syncFields);
+    if (whatsInput) whatsInput.addEventListener('input', syncFields);
+
+    /* Validate urgency form: scroll to personalize if fields empty */
+    const urgForm = document.getElementById('pl-form-urgency');
+    if (urgForm) {
+      urgForm.addEventListener('submit', function(e) {
+        if (!nameInput.value || !flavorInput.value || !whatsInput.value) {
+          e.preventDefault();
+          const section = document.getElementById('pl-personalize');
+          if (section) {
+            section.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            /* Focus first empty field */
+            if (!nameInput.value) nameInput.focus();
+            else if (!flavorInput.value) flavorInput.focus();
+            else whatsInput.focus();
+          }
+        } else {
+          syncFields();
+        }
+      });
+    }
+  })();
+</script>
 
 {% schema %}
 {
