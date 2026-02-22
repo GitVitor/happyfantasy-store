@@ -1,94 +1,181 @@
 {
   "sections": {
-    "main": {
-      "type": "main-product",
+    "landing": {
+      "type": "product-landing",
       "blocks": {
-        "vendor": {
-          "type": "text",
+        "benefit_1": {
+          "type": "benefit",
           "settings": {
-            "text": "{{ product.vendor }}",
-            "text_style": "uppercase"
+            "icon": "⚡",
+            "color": "pink",
+            "title": "Entrega Imediata",
+            "text": "Receba em minutos no seu e-mail"
           }
         },
-        "title": {
-          "type": "title"
-        },
-        "caption": {
-          "type": "text",
+        "benefit_2": {
+          "type": "benefit",
           "settings": {
-            "text": "{{ product.metafields.descriptors.subtitle.value }}",
-            "text_style": "subtitle"
+            "icon": "🎨",
+            "color": "lavender",
+            "title": "100% Personalizado",
+            "text": "Com o nome da criança no vídeo"
           }
         },
-        "price": {
-          "type": "price"
-        },
-        "variant_picker": {
-          "type": "variant_picker",
+        "benefit_3": {
+          "type": "benefit",
           "settings": {
-            "picker_type": "button"
+            "icon": "🔒",
+            "color": "mint",
+            "title": "Pagamento Seguro",
+            "text": "Pix, cartão ou boleto com segurança"
           }
         },
-        "quantity_selector": {
-          "type": "quantity_selector"
-        },
-        "buy_buttons": {
-          "type": "buy_buttons",
+        "benefit_4": {
+          "type": "benefit",
           "settings": {
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
+            "icon": "💜",
+            "color": "yellow",
+            "title": "Satisfação Garantida",
+            "text": "Não amou? Devolvemos seu dinheiro"
           }
         },
-        "description": {
-          "type": "description"
+        "step_1": {
+          "type": "step",
+          "settings": {
+            "icon": "🛒",
+            "title": "Compre e Personalize",
+            "text": "Escolha o vídeo e informe o nome da criança. É rapidinho!"
+          }
+        },
+        "step_2": {
+          "type": "step",
+          "settings": {
+            "icon": "✨",
+            "title": "Receba por E-mail",
+            "text": "Em poucos minutos, o vídeo personalizado chega no seu e-mail, prontinho!"
+          }
+        },
+        "step_3": {
+          "type": "step",
+          "settings": {
+            "icon": "🥰",
+            "title": "Emocione a Família!",
+            "text": "Compartilhe com a criança e veja a carinha de surpresa e alegria!"
+          }
+        },
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "text": "Minha filha ficou de boca aberta! Quando o coelhinho falou o nome dela, ela gritou de alegria. Chorei de emoção junto!",
+            "name": "Ana Paula",
+            "role": "Mãe da Sofia, 4 anos"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "text": "Presente perfeito! O vídeo ficou lindo, super profissional. Meu neto assistiu umas 20 vezes seguidas e ria toda vez!",
+            "name": "Dona Marta",
+            "role": "Avó do Pedro, 6 anos"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "text": "Que ideia maravilhosa! Surpreendi meu sobrinho e a reação dele foi a coisa mais fofa do mundo. Super recomendo!",
+            "name": "Camila Rocha",
+            "role": "Tia do Bento, 3 anos"
+          }
+        },
+        "faq_1": {
+          "type": "faq",
+          "settings": {
+            "question": "Como funciona a personalização?",
+            "answer": "Basta informar o nome da criança no momento da compra. Nosso sistema gera automaticamente um vídeo encantador com o Coelhinho da Páscoa falando diretamente com ela — é pura magia!"
+          }
+        },
+        "faq_2": {
+          "type": "faq",
+          "settings": {
+            "question": "Quanto tempo leva para receber?",
+            "answer": "O vídeo personalizado é entregue em poucos minutos após a confirmação do pagamento. Você recebe um link de download diretamente no seu e-mail."
+          }
+        },
+        "faq_3": {
+          "type": "faq",
+          "settings": {
+            "question": "Para qual idade é indicado?",
+            "answer": "Os vídeos são pensados para encantar crianças de 2 a 10 anos, mas a verdade é que toda a família se emociona! Avós, tios e pais adoram assistir junto."
+          }
+        },
+        "faq_4": {
+          "type": "faq",
+          "settings": {
+            "question": "Posso enviar para mais de uma criança?",
+            "answer": "Sim! Cada compra gera um vídeo com um nome. Se quiser surpreender mais crianças, basta adicionar mais unidades ao carrinho com nomes diferentes."
+          }
+        },
+        "faq_5": {
+          "type": "faq",
+          "settings": {
+            "question": "E se eu não gostar do resultado?",
+            "answer": "Oferecemos satisfação garantida! Se por qualquer motivo você não ficar feliz com o vídeo, entre em contato e devolvemos 100% do seu dinheiro. Sem complicação."
+          }
+        },
+        "faq_6": {
+          "type": "faq",
+          "settings": {
+            "question": "Como compartilho o vídeo?",
+            "answer": "Você pode baixar o vídeo e enviar por WhatsApp, mostrar no celular ou até projetar na TV. Fica lindo em qualquer tela!"
+          }
         }
       },
       "block_order": [
-        "vendor",
-        "title",
-        "caption",
-        "price",
-        "variant_picker",
-        "quantity_selector",
-        "buy_buttons",
-        "description",
-        "collapsible-row-0",
-        "collapsible-row-1",
-        "collapsible-row-2",
-        "collapsible-row-3",
-        "share"
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4",
+        "step_1",
+        "step_2",
+        "step_3",
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3",
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5",
+        "faq_6"
       ],
       "settings": {
-        "enable_sticky_info": true,
-        "gallery_layout": "stacked",
-        "media_size": "large",
-        "constrain_to_viewport": true,
-        "mobile_thumbnails": "hide",
-        "hide_variants": true,
-        "enable_video_looping": false,
-        "padding_top": 36,
-        "padding_bottom": 12
-      }
-    },
-    "related-products": {
-      "type": "related-products",
-      "settings": {
-        "heading": "You may also like",
-        "heading_size": "h2",
-        "columns_desktop": 4,
-        "color_scheme": "scheme-1",
-        "image_ratio": "square",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "columns_mobile": "2",
-        "padding_top": 36,
-        "padding_bottom": 28
+        "hero_badge": "🐣 Especial de Páscoa — Edição Limitada!",
+        "hero_title": "<p>Vídeo de Páscoa <em>Mágico e Personalizado<\/em> para Seu Pequeno 🐰<\/p>",
+        "hero_subtitle": "Surpreenda com um vídeo encantador com o nome da criança! O Coelhinho da Páscoa fala diretamente com ela — pura emoção em família.",
+        "hero_price_note": "🎉 Lançamento Especial",
+        "hero_cta_text": "Quero Surpreender Agora! 🐣",
+        "hero_trust_text": "Pagamento 100% seguro • Entrega imediata por e-mail",
+        "hero_media_tag": "Preview do vídeo",
+        "steps_label": "Simples e Rápido",
+        "steps_title": "Como Funciona?",
+        "steps_subtitle": "Em 3 passinhos seu vídeo personalizado está pronto para emocionar!",
+        "preview_label": "Veja Como Fica",
+        "preview_title": "Um Gostinho da Magia ✨",
+        "preview_caption": "* Exemplo ilustrativo — seu vídeo terá o nome da criança!",
+        "testimonials_label": "Famílias Amando",
+        "testimonials_title": "Olha o Que Estão Dizendo 💜",
+        "faq_label": "Dúvidas?",
+        "faq_title": "Perguntas Frequentes",
+        "urgency_label": "⏰ Páscoa Chegando!",
+        "urgency_title": "Não Deixe Para a Última Hora!",
+        "urgency_text": "As personalizações são limitadas por dia — garanta o vídeo do seu pequeno antes que os pedidos se esgotem!",
+        "urgency_countdown_text": "Última chance antes da Páscoa — personalizações encerrando!",
+        "urgency_cta_text": "Garantir Meu Vídeo Agora! 🐰",
+        "urgency_guarantee": "Satisfação garantida ou seu dinheiro de volta"
       }
     }
   },
   "order": [
-    "main",
-    "related-products"
+    "landing"
   ]
 }

@@ -1,0 +1,505 @@
+{{ 'section-product-landing.css' | asset_url | stylesheet_tag }}
+
+<div class="product-landing">
+
+  {%- comment -%} ===== HERO SECTION ===== {%- endcomment -%}
+  <section class="pl-hero">
+    <div class="pl-container">
+      <div class="pl-hero__grid">
+        <div class="pl-hero__content">
+          <div class="pl-hero__badge pl-float">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+            {{ section.settings.hero_badge }}
+          </div>
+
+          <h1 class="pl-hero__title">{{ section.settings.hero_title }}</h1>
+
+          <p class="pl-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+
+          <div class="pl-hero__price-row">
+            <span class="pl-hero__price">{{ product.price | money }}</span>
+            {%- if section.settings.hero_price_note != blank -%}
+              <span class="pl-hero__price-note">{{ section.settings.hero_price_note }}</span>
+            {%- endif -%}
+          </div>
+
+          <div class="pl-hero__actions">
+            {%- form 'product', product -%}
+              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+              <button type="submit" class="pl-btn pl-btn--lg" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+                <span>{{ section.settings.hero_cta_text }}</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            {%- endform -%}
+          </div>
+
+          <div class="pl-hero__trust">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <span>{{ section.settings.hero_trust_text }}</span>
+          </div>
+        </div>
+
+        <div class="pl-hero__media">
+          <div class="pl-hero__media-wrapper">
+            {%- if product.featured_media -%}
+              {{ product.featured_media | image_url: width: 800 | image_tag:
+                loading: 'eager',
+                widths: '400, 600, 800',
+                sizes: '(min-width: 750px) 50vw, 100vw'
+              }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            <button class="pl-hero__play-btn" aria-label="Assistir preview" type="button">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+            <span class="pl-hero__media-tag">🐰 {{ section.settings.hero_media_tag }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== BENEFITS BAR ===== {%- endcomment -%}
+  <section class="pl-benefits-bar">
+    <div class="pl-container">
+      <div class="pl-benefits-bar__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'benefit' -%}
+            <div class="pl-benefit-item" {{ block.shopify_attributes }}>
+              <div class="pl-benefit-item__icon pl-benefit-item__icon--{{ block.settings.color }}">
+                {{ block.settings.icon }}
+              </div>
+              <div class="pl-benefit-item__text">
+                <h4>{{ block.settings.title }}</h4>
+                <p>{{ block.settings.text }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== HOW IT WORKS ===== {%- endcomment -%}
+  <section class="pl-how-it-works">
+    <div class="pl-container pl-text-center">
+      <span class="pl-section-label">{{ section.settings.steps_label }}</span>
+      <h2 class="pl-section-title">{{ section.settings.steps_title }}</h2>
+      <p class="pl-section-subtitle">{{ section.settings.steps_subtitle }}</p>
+
+      <div class="pl-steps">
+        <div class="pl-steps__connector"></div>
+        {%- assign step_count = 0 -%}
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'step' -%}
+            {%- assign step_count = step_count | plus: 1 -%}
+            <div class="pl-step" {{ block.shopify_attributes }}>
+              <span class="pl-step__number">{{ step_count }}</span>
+              <span class="pl-step__icon">{{ block.settings.icon }}</span>
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== VIDEO PREVIEW ===== {%- endcomment -%}
+  <section class="pl-preview">
+    <div class="pl-container pl-text-center">
+      <span class="pl-section-label">{{ section.settings.preview_label }}</span>
+      <h2 class="pl-section-title">{{ section.settings.preview_title }}</h2>
+
+      <div class="pl-preview__wrapper">
+        <div class="pl-preview__frame">
+          {%- if product.media.size > 1 -%}
+            {%- for media in product.media -%}
+              {%- if media.media_type == 'video' or media.media_type == 'external_video' -%}
+                {{ media | media_tag: autoplay: false, controls: true }}
+                {%- break -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {%- else -%}
+            {%- if product.featured_media -%}
+              {{ product.featured_media | image_url: width: 900 | image_tag:
+                loading: 'lazy',
+                widths: '400, 600, 900',
+                sizes: '(min-width: 750px) 720px, 100vw'
+              }}
+            {%- else -%}
+              {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            <button class="pl-hero__play-btn" aria-label="Assistir preview" type="button">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          {%- endif -%}
+        </div>
+        <p class="pl-preview__caption">{{ section.settings.preview_caption }}</p>
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== TESTIMONIALS ===== {%- endcomment -%}
+  <section class="pl-testimonials">
+    <div class="pl-container pl-text-center">
+      <span class="pl-section-label">{{ section.settings.testimonials_label }}</span>
+      <h2 class="pl-section-title">{{ section.settings.testimonials_title }}</h2>
+
+      <div class="pl-testimonials__grid">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'testimonial' -%}
+            <div class="pl-testimonial" {{ block.shopify_attributes }}>
+              <div class="pl-testimonial__stars">★★★★★</div>
+              <p class="pl-testimonial__text">"{{ block.settings.text }}"</p>
+              <div class="pl-testimonial__author">
+                <div class="pl-testimonial__avatar">{{ block.settings.name | slice: 0 }}</div>
+                <div>
+                  <div class="pl-testimonial__name">{{ block.settings.name }}</div>
+                  <div class="pl-testimonial__role">{{ block.settings.role }}</div>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== FAQ ===== {%- endcomment -%}
+  <section class="pl-faq">
+    <div class="pl-container pl-text-center">
+      <span class="pl-section-label">{{ section.settings.faq_label }}</span>
+      <h2 class="pl-section-title">{{ section.settings.faq_title }}</h2>
+
+      <div class="pl-faq__list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'faq' -%}
+            <details class="pl-faq-item" {{ block.shopify_attributes }}>
+              <summary class="pl-faq-item__question">
+                {{ block.settings.question }}
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              </summary>
+              <div class="pl-faq-item__answer">
+                <p>{{ block.settings.answer }}</p>
+              </div>
+            </details>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </section>
+
+  {%- comment -%} ===== URGENCY / FINAL CTA ===== {%- endcomment -%}
+  <section class="pl-urgency">
+    <div class="pl-container">
+      <span class="pl-section-label">{{ section.settings.urgency_label }}</span>
+      <h2 class="pl-section-title">{{ section.settings.urgency_title }}</h2>
+      <p class="pl-urgency__subtitle">{{ section.settings.urgency_text }}</p>
+
+      <div class="pl-urgency__countdown pl-pulse">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        {{ section.settings.urgency_countdown_text }}
+      </div>
+
+      {%- form 'product', product -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+        <button type="submit" class="pl-btn pl-btn--lg" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+          <span>{{ section.settings.urgency_cta_text }}</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      {%- endform -%}
+
+      <p class="pl-urgency__guarantee">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        {{ section.settings.urgency_guarantee }}
+      </p>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Produto Landing Page",
+  "tag": "div",
+  "class": "product-landing-wrapper",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🐰 Hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Badge text",
+      "default": "🐣 Especial de Páscoa — Edição Limitada!"
+    },
+    {
+      "type": "richtext",
+      "id": "hero_title",
+      "label": "Título hero",
+      "default": "<p>Vídeo de Páscoa <em>Mágico e Personalizado</em> para Seu Pequeno 🐰</p>"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Subtítulo hero",
+      "default": "Surpreenda com um vídeo encantador com o nome da criança! O Coelhinho da Páscoa fala diretamente com ela — pura emoção em família."
+    },
+    {
+      "type": "text",
+      "id": "hero_price_note",
+      "label": "Nota de preço",
+      "default": "🎉 Lançamento Especial"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_text",
+      "label": "Texto botão CTA",
+      "default": "Quero Surpreender Agora! 🐣"
+    },
+    {
+      "type": "text",
+      "id": "hero_trust_text",
+      "label": "Texto de confiança",
+      "default": "Pagamento 100% seguro • Entrega imediata por e-mail"
+    },
+    {
+      "type": "text",
+      "id": "hero_media_tag",
+      "label": "Tag do media",
+      "default": "Preview do vídeo"
+    },
+    {
+      "type": "header",
+      "content": "📋 Como Funciona"
+    },
+    {
+      "type": "text",
+      "id": "steps_label",
+      "label": "Label",
+      "default": "Simples e Rápido"
+    },
+    {
+      "type": "text",
+      "id": "steps_title",
+      "label": "Título",
+      "default": "Como Funciona?"
+    },
+    {
+      "type": "text",
+      "id": "steps_subtitle",
+      "label": "Subtítulo",
+      "default": "Em 3 passinhos seu vídeo personalizado está pronto para emocionar!"
+    },
+    {
+      "type": "header",
+      "content": "🎬 Preview do Vídeo"
+    },
+    {
+      "type": "text",
+      "id": "preview_label",
+      "label": "Label",
+      "default": "Veja Como Fica"
+    },
+    {
+      "type": "text",
+      "id": "preview_title",
+      "label": "Título",
+      "default": "Um Gostinho da Magia ✨"
+    },
+    {
+      "type": "text",
+      "id": "preview_caption",
+      "label": "Legenda",
+      "default": "* Exemplo ilustrativo — seu vídeo terá o nome da criança!"
+    },
+    {
+      "type": "header",
+      "content": "💬 Depoimentos"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_label",
+      "label": "Label",
+      "default": "Famílias Amando"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Título",
+      "default": "Olha o Que Estão Dizendo 💜"
+    },
+    {
+      "type": "header",
+      "content": "❓ Perguntas Frequentes"
+    },
+    {
+      "type": "text",
+      "id": "faq_label",
+      "label": "Label",
+      "default": "Dúvidas?"
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "Título",
+      "default": "Perguntas Frequentes"
+    },
+    {
+      "type": "header",
+      "content": "🔥 Urgência Final"
+    },
+    {
+      "type": "text",
+      "id": "urgency_label",
+      "label": "Label",
+      "default": "⏰ Páscoa Chegando!"
+    },
+    {
+      "type": "text",
+      "id": "urgency_title",
+      "label": "Título",
+      "default": "Não Deixe Para a Última Hora!"
+    },
+    {
+      "type": "text",
+      "id": "urgency_text",
+      "label": "Texto",
+      "default": "As personalizações são limitadas por dia — garanta o vídeo do seu pequeno antes que os pedidos se esgotem!"
+    },
+    {
+      "type": "text",
+      "id": "urgency_countdown_text",
+      "label": "Texto countdown",
+      "default": "Última chance antes da Páscoa — personalizações encerrando!"
+    },
+    {
+      "type": "text",
+      "id": "urgency_cta_text",
+      "label": "Texto CTA final",
+      "default": "Garantir Meu Vídeo Agora! 🐰"
+    },
+    {
+      "type": "text",
+      "id": "urgency_guarantee",
+      "label": "Garantia",
+      "default": "Satisfação garantida ou seu dinheiro de volta"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefício",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji ícone",
+          "default": "⚡"
+        },
+        {
+          "type": "select",
+          "id": "color",
+          "label": "Cor do ícone",
+          "options": [
+            { "value": "pink", "label": "Rosa" },
+            { "value": "mint", "label": "Verde" },
+            { "value": "lavender", "label": "Lilás" },
+            { "value": "yellow", "label": "Amarelo" }
+          ],
+          "default": "pink"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Entrega Imediata"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Receba em minutos no seu e-mail"
+        }
+      ]
+    },
+    {
+      "type": "step",
+      "name": "Passo",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji ícone",
+          "default": "📝"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Escolha e Personalize"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Descrição",
+          "default": "Informe o nome da criança e a mensagem especial."
+        }
+      ]
+    },
+    {
+      "type": "testimonial",
+      "name": "Depoimento",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Minha filha amou! Ficou encantada vendo o coelhinho falar o nome dela."
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nome",
+          "default": "Ana Paula"
+        },
+        {
+          "type": "text",
+          "id": "role",
+          "label": "Papel",
+          "default": "Mãe da Sofia, 4 anos"
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "Pergunta FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pergunta",
+          "default": "Como funciona a personalização?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Resposta",
+          "default": "Basta informar o nome da criança no momento da compra. Nosso sistema gera automaticamente um vídeo encantador com o Coelhinho da Páscoa falando diretamente com ela!"
+        }
+      ]
+    }
+  ],
+  "templates": [
+    "product"
+  ],
+  "presets": [
+    {
+      "name": "Produto Landing Page"
+    }
+  ]
+}
+{% endschema %}
