@@ -9,18 +9,18 @@
 }
 
 .product-landing {
-  --pl-pink: #F5B8C8;
-  --pl-pink-light: #FDF0F4;
-  --pl-mint: #A8D5BA;
-  --pl-mint-light: #E8F5EE;
-  --pl-lavender: #C8A8D8;
-  --pl-lavender-light: #F3ECF8;
-  --pl-yellow: #FFF3D0;
-  --pl-yellow-accent: #FFD966;
-  --pl-plum: #4A3347;
-  --pl-plum-light: #6B5068;
-  --pl-white: #FFFFFF;
-  --pl-off-white: #FFFBF7;
+  --pl-pink: #f5b8c8;
+  --pl-pink-light: #fdf0f4;
+  --pl-mint: #a8d5ba;
+  --pl-mint-light: #e8f5ee;
+  --pl-lavender: #c8a8d8;
+  --pl-lavender-light: #f3ecf8;
+  --pl-yellow: #fff3d0;
+  --pl-yellow-accent: #ffd966;
+  --pl-plum: #4a3347;
+  --pl-plum-light: #6b5068;
+  --pl-white: #ffffff;
+  --pl-off-white: #fffbf7;
   --pl-radius: 16px;
   --pl-radius-sm: 10px;
   --pl-shadow: 0 4px 24px rgba(74, 51, 71, 0.08);
@@ -390,10 +390,18 @@
   font-size: 1.5rem;
 }
 
-.pl-benefit-item__icon--pink { background: var(--pl-pink-light); }
-.pl-benefit-item__icon--mint { background: var(--pl-mint-light); }
-.pl-benefit-item__icon--lavender { background: var(--pl-lavender-light); }
-.pl-benefit-item__icon--yellow { background: var(--pl-yellow); }
+.pl-benefit-item__icon--pink {
+  background: var(--pl-pink-light);
+}
+.pl-benefit-item__icon--mint {
+  background: var(--pl-mint-light);
+}
+.pl-benefit-item__icon--lavender {
+  background: var(--pl-lavender-light);
+}
+.pl-benefit-item__icon--yellow {
+  background: var(--pl-yellow);
+}
 
 .pl-benefit-item__text h4 {
   font-size: 0.95rem;
@@ -698,7 +706,7 @@
 
 /* ---------- URGENCY / FINAL CTA ---------- */
 .pl-urgency {
-  background: linear-gradient(135deg, var(--pl-plum) 0%, #5C3D5E 100%);
+  background: linear-gradient(135deg, var(--pl-plum) 0%, #5c3d5e 100%);
   color: var(--pl-white);
   text-align: center;
   position: relative;
@@ -765,7 +773,7 @@
 }
 
 .pl-urgency .pl-btn {
-  background: linear-gradient(135deg, var(--pl-yellow-accent), #FFB347);
+  background: linear-gradient(135deg, var(--pl-yellow-accent), #ffb347);
   color: var(--pl-plum);
   box-shadow: 0 4px 24px rgba(255, 217, 102, 0.4);
 }
@@ -775,7 +783,7 @@
 }
 
 .pl-urgency .pl-btn::after {
-  background: linear-gradient(135deg, #FFB347, var(--pl-yellow-accent));
+  background: linear-gradient(135deg, #ffb347, var(--pl-yellow-accent));
 }
 
 .pl-urgency__guarantee {
@@ -800,13 +808,23 @@
 
 /* ---------- ANIMATIONS ---------- */
 @keyframes pl-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }
 
 @keyframes pl-pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
 }
 
 .pl-float {
