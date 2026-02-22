@@ -1,0 +1,46 @@
+/* CTA Banner */
+.cta-banner__inner {
+  text-align: center;
+  max-width: 80rem;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cta-banner__subheading {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+.cta-banner__heading {
+  margin: 0;
+}
+
+.cta-banner__text {
+  font-size: 1.6rem;
+  line-height: 1.6;
+  opacity: 0.8;
+  max-width: 60rem;
+}
+
+.cta-banner__text p {
+  margin: 0;
+}
+
+.cta-banner__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+  margin-top: 0.8rem;
+}
+
+.cta-banner__button {
+  min-width: 20rem;
+  text-align: center;
+}

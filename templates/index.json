@@ -1,210 +1,231 @@
 {
   "sections": {
-    "image_banner": {
-      "type": "image-banner",
+    "hero": {
+      "type": "hero-section",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "bullet_1": {
+          "type": "bullet_point",
           "settings": {
-            "heading": "Image banner",
-            "heading_size": "h0"
+            "text": "Personalizado especialmente para você"
           }
         },
-        "text": {
-          "type": "text",
+        "bullet_2": {
+          "type": "bullet_point",
           "settings": {
-            "text": "Give customers details about the banner image(s) or content on the template.",
-            "text_style": "body"
+            "text": "Entregue em poucos minutos"
           }
         },
-        "button": {
-          "type": "buttons",
+        "bullet_3": {
+          "type": "bullet_point",
           "settings": {
-            "button_label_1": "Shop all",
-            "button_link_1": "shopify://collections/all",
-            "button_style_secondary_1": true,
-            "button_label_2": "",
-            "button_link_2": "",
-            "button_style_secondary_2": false
+            "text": "Perfeito para qualquer ocasião"
           }
         }
       },
       "block_order": [
-        "heading",
-        "text",
-        "button"
+        "bullet_1",
+        "bullet_2",
+        "bullet_3"
       ],
       "settings": {
-        "image_overlay_opacity": 40,
-        "image_height": "large",
-        "desktop_content_position": "bottom-center",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": false,
-        "show_text_below": false
-      }
-    },
-    "rich_text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Talk about your brand",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Share information about your brand with your customers. Describe a product, make announcements, or welcome customers to your store.<\/p>"
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text"
-      ],
-      "settings": {
+        "subheading": "Bem-vindo à Happy Fantasy",
+        "heading": "Vídeos Personalizados e Mágicos para Cada Ocasião",
+        "heading_size": "h0",
+        "text": "<p>Crie momentos inesquecíveis com nossas mensagens em vídeo personalizadas. Perfeitas para aniversários, feriados e comemorações especiais.</p>",
+        "button_label": "Comprar Agora",
+        "button_link": "shopify:\/\/collections\/all",
         "color_scheme": "scheme-1",
-        "full_width": true,
-        "padding_top": 40,
-        "padding_bottom": 0
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
-    "featured_collection": {
+    "best_sellers": {
       "type": "featured-collection",
       "settings": {
-        "title": "Featured products",
-        "heading_size": "h2",
+        "title": "Mais Vendidos",
+        "heading_size": "h1",
         "collection": "all",
-        "products_to_show": 8,
+        "products_to_show": 4,
         "columns_desktop": 4,
         "color_scheme": "scheme-1",
-        "show_view_all": false,
-        "swipe_on_mobile": false,
+        "show_view_all": true,
+        "view_all_style": "link",
+        "enable_desktop_slider": false,
+        "swipe_on_mobile": true,
         "image_ratio": "adapt",
+        "image_shape": "default",
         "show_secondary_image": true,
         "show_vendor": false,
-        "show_rating": false,
+        "show_rating": true,
+        "quick_add": "standard",
         "columns_mobile": "2",
-        "padding_top": 28,
-        "padding_bottom": 36
-      }
-    },
-    "collage": {
-      "type": "collage",
-      "blocks": {
-        "collection-0": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "product": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "second_image": false
-          }
-        },
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection-0",
-        "product",
-        "collection-1"
-      ],
-      "settings": {
-        "heading": "Multimedia collage",
-        "heading_size": "h2",
-        "desktop_layout": "left",
-        "mobile_layout": "collage",
-        "color_scheme": "scheme-1",
         "padding_top": 36,
         "padding_bottom": 36
       }
     },
-    "video": {
-      "type": "video",
-      "settings": {
-        "heading": "",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "heading_size": "h1",
-        "description": "",
-        "full_width": false,
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "multicolumn": {
-      "type": "multicolumn",
+    "brand_benefits": {
+      "type": "brand-benefits",
       "blocks": {
-        "column1": {
-          "type": "column",
+        "benefit_1": {
+          "type": "benefit",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "icon": "none",
+            "title": "100% Personalizado",
+            "text": "Cada vídeo é criado de forma única com seus dados pessoais e sua mensagem."
           }
         },
-        "column2": {
-          "type": "column",
+        "benefit_2": {
+          "type": "benefit",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "icon": "none",
+            "title": "Entrega Rápida",
+            "text": "Receba seu vídeo personalizado em poucos minutos após o pedido."
           }
         },
-        "column3": {
-          "type": "column",
+        "benefit_3": {
+          "type": "benefit",
           "settings": {
-            "title": "Column",
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.<\/p>",
-            "link_label": "",
-            "link": ""
+            "icon": "none",
+            "title": "Alta Qualidade",
+            "text": "Vídeos profissionais com animações e efeitos deslumbrantes."
+          }
+        },
+        "benefit_4": {
+          "type": "benefit",
+          "settings": {
+            "icon": "none",
+            "title": "Satisfação Garantida",
+            "text": "Não ficou satisfeito? Nós resolvemos ou devolvemos seu dinheiro."
           }
         }
       },
       "block_order": [
-        "column1",
-        "column2",
-        "column3"
+        "benefit_1",
+        "benefit_2",
+        "benefit_3",
+        "benefit_4"
       ],
       "settings": {
-        "title": "",
+        "subheading": "Por Que Nos Escolher",
+        "heading": "Por Que Escolher a Happy Fantasy?",
         "heading_size": "h1",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "button_label": "",
+        "layout": "image_first",
+        "button_label": "Saiba Mais",
         "button_link": "",
-        "swipe_on_mobile": false,
         "color_scheme": "scheme-1",
-        "columns_mobile": "1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "about_brand": {
+      "type": "about-brand",
+      "settings": {
+        "subheading": "Sobre Nós",
+        "heading": "A História por Trás da Happy Fantasy",
+        "heading_size": "h1",
+        "text": "<p>Acreditamos que toda comemoração merece um toque de magia. A Happy Fantasy nasceu de uma ideia simples: que mensagens em vídeo personalizadas e carinhosas podem transformar momentos comuns em memórias extraordinárias.</p><p>Nossa equipe de artistas criativos e desenvolvedores trabalha incansavelmente para trazer a você os vídeos personalizados mais encantadores, feitos com amor e atenção aos detalhes.</p>",
+        "layout": "text_first",
+        "button_label": "Conheça Nossa História",
+        "button_link": "",
+        "color_scheme": "scheme-1",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "faqs": {
+      "type": "collapsible-content",
+      "blocks": {
+        "faq_1": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "O que são vídeos personalizados?",
+            "icon": "question_mark",
+            "row_content": "<p>Nossos vídeos personalizados são mensagens em vídeo feitas sob medida, com seu nome, fotos ou detalhes especiais. Cada vídeo é criado com belas animações e efeitos para proporcionar uma experiência verdadeiramente única e memorável.</p>",
+            "page": ""
+          }
+        },
+        "faq_2": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Quanto tempo leva a entrega?",
+            "icon": "question_mark",
+            "row_content": "<p>A maioria dos vídeos personalizados é entregue em poucos minutos após o pedido. Você receberá um link para download por e-mail que poderá compartilhar imediatamente com seus entes queridos.</p>",
+            "page": ""
+          }
+        },
+        "faq_3": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Posso personalizar a mensagem?",
+            "icon": "question_mark",
+            "row_content": "<p>Com certeza! Você pode incluir nomes personalizados, mensagens, fotos e outros detalhes pessoais para tornar cada vídeo verdadeiramente especial e único.</p>",
+            "page": ""
+          }
+        },
+        "faq_4": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Qual é a política de reembolso?",
+            "icon": "question_mark",
+            "row_content": "<p>Oferecemos garantia de satisfação. Se você não estiver completamente satisfeito com seu vídeo personalizado, entre em contato com nossa equipe de suporte e nós resolveremos ou faremos um reembolso completo.</p>",
+            "page": ""
+          }
+        },
+        "faq_5": {
+          "type": "collapsible_row",
+          "settings": {
+            "heading": "Para quais ocasiões são os vídeos?",
+            "icon": "question_mark",
+            "row_content": "<p>Nossos vídeos são perfeitos para aniversários, feriados, Páscoa, Natal, Dia dos Namorados, Dia das Mães, Dia dos Pais, bodas, formaturas e qualquer outra comemoração especial!</p>",
+            "page": ""
+          }
+        }
+      },
+      "block_order": [
+        "faq_1",
+        "faq_2",
+        "faq_3",
+        "faq_4",
+        "faq_5"
+      ],
+      "settings": {
+        "caption": "",
+        "heading": "Perguntas Frequentes",
+        "heading_size": "h1",
+        "heading_alignment": "center",
+        "layout": "none",
+        "color_scheme": "scheme-1",
+        "container_color_scheme": "scheme-2",
+        "open_first_collapsible_row": true,
+        "image_ratio": "adapt",
+        "desktop_layout": "image_second",
+        "padding_top": 40,
+        "padding_bottom": 52
+      }
+    },
+    "cta_banner": {
+      "type": "cta-banner",
+      "settings": {
+        "subheading": "Não Perca",
+        "heading": "Crie Seu Vídeo Mágico Hoje",
+        "heading_size": "h1",
+        "text": "<p>Junte-se a milhares de clientes satisfeitos que tornaram suas comemorações inesquecíveis com nossas mensagens em vídeo personalizadas.</p>",
+        "button_label": "Comprar Agora",
+        "button_link": "shopify:\/\/collections\/all",
+        "button_label_2": "",
+        "button_link_2": "",
+        "color_scheme": "scheme-2",
+        "padding_top": 52,
+        "padding_bottom": 52
       }
     }
   },
   "order": [
-    "image_banner",
-    "rich_text",
-    "featured_collection",
-    "collage",
-    "video",
-    "multicolumn"
+    "hero",
+    "best_sellers",
+    "brand_benefits",
+    "about_brand",
+    "faqs",
+    "cta_banner"
   ]
 }

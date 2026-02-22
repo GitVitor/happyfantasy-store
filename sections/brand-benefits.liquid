@@ -1,0 +1,221 @@
+{{ 'section-brand-benefits.css' | asset_url | stylesheet_tag }}
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="color-{{ section.settings.color_scheme }} gradient">
+  <div class="brand-benefits page-width section-{{ section.id }}-padding">
+    <div class="brand-benefits__grid{% if section.settings.layout == 'image_first' %} brand-benefits__grid--reverse{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      <div class="brand-benefits__media">
+        {%- if section.settings.image != blank -%}
+          {{
+            section.settings.image
+            | image_url: width: 1200
+            | image_tag:
+              sizes: '(min-width: 750px) 50vw, 100vw',
+              widths: '375, 550, 750, 1100, 1200',
+              class: 'brand-benefits__image'
+          }}
+        {%- else -%}
+          <div class="brand-benefits__placeholder">
+            {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="brand-benefits__content">
+        {%- if section.settings.subheading != blank -%}
+          <p class="brand-benefits__subheading caption-with-letter-spacing">
+            {{ section.settings.subheading | escape }}
+          </p>
+        {%- endif -%}
+
+        {%- if section.settings.heading != blank -%}
+          <h2 class="brand-benefits__heading {{ section.settings.heading_size }}">
+            {{ section.settings.heading }}
+          </h2>
+        {%- endif -%}
+
+        <div class="brand-benefits__list">
+          {%- for block in section.blocks -%}
+            <div class="brand-benefits__item" {{ block.shopify_attributes }}>
+              <div class="brand-benefits__item-icon">
+                {%- if block.settings.icon != 'none' -%}
+                  {% render 'icon-accordion', icon: block.settings.icon %}
+                {%- else -%}
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                {%- endif -%}
+              </div>
+              <div class="brand-benefits__item-text">
+                {%- if block.settings.title != blank -%}
+                  <h3 class="brand-benefits__item-title h4">{{ block.settings.title }}</h3>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <p class="brand-benefits__item-description">{{ block.settings.text }}</p>
+                {%- endif -%}
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        {%- if section.settings.button_label != blank -%}
+          <a
+            {% if section.settings.button_link != blank %}
+              href="{{ section.settings.button_link }}"
+            {% endif %}
+            class="button button--primary brand-benefits__button"
+            {% if section.settings.button_link == blank %}
+              aria-disabled="true"
+            {% endif %}
+          >
+            {{ section.settings.button_label | escape }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Benefícios da Marca",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subtítulo",
+      "default": "Por Que Nos Escolher"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "Título",
+      "default": "Por Que Escolher a Happy Fantasy?"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        { "value": "h2", "label": "Small" },
+        { "value": "h1", "label": "Medium" },
+        { "value": "h0", "label": "Large" }
+      ],
+      "default": "h1",
+      "label": "Heading size"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        { "value": "image_first", "label": "Image first" },
+        { "value": "image_second", "label": "Image second" }
+      ],
+      "default": "image_first",
+      "label": "Desktop image placement"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Texto do botão",
+      "default": "Saiba Mais"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button link"
+    },
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom padding",
+      "default": 52
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "options": [
+            { "value": "none", "label": "None" },
+            { "value": "checkmark", "label": "Checkmark" },
+            { "value": "heart", "label": "Heart" },
+            { "value": "star", "label": "Star" },
+            { "value": "truck", "label": "Truck" },
+            { "value": "return", "label": "Return" },
+            { "value": "lock", "label": "Lock" }
+          ],
+          "default": "none",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Título do benefício"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Descrição",
+          "default": "Breve descrição deste benefício"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Benefícios da Marca",
+      "blocks": [
+        { "type": "benefit", "settings": { "title": "100% Personalizado", "text": "Cada vídeo é criado de forma única com seus dados pessoais e sua mensagem." } },
+        { "type": "benefit", "settings": { "title": "Entrega Rápida", "text": "Receba seu vídeo personalizado em poucos minutos após o pedido." } },
+        { "type": "benefit", "settings": { "title": "Alta Qualidade", "text": "Vídeos profissionais com animações e efeitos deslumbrantes." } },
+        { "type": "benefit", "settings": { "title": "Satisfação Garantida", "text": "Não ficou satisfeito? Nós resolvemos ou devolvemos seu dinheiro." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
