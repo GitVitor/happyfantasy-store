@@ -1,4 +1,5 @@
 {{ 'section-hero.css' | asset_url | stylesheet_tag }}
+{{ 'homepage-overrides.css' | asset_url | stylesheet_tag }}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -53,7 +54,7 @@
             {% if section.settings.button_link != blank %}
               href="{{ section.settings.button_link }}"
             {% endif %}
-            class="button button--primary hero-section__button"
+            class="hero-section__button"
             {% if section.settings.button_link == blank %}
               aria-disabled="true"
             {% endif %}

@@ -1,0 +1,89 @@
+/* Homepage Design Overrides — Consistent with Product Landing Page */
+
+/* ===========================
+   Global Homepage Variables
+   =========================== */
+:root {
+  --hf-pink: #F5B8C8;
+  --hf-pink-light: #FDF0F4;
+  --hf-mint: #A8D5BA;
+  --hf-mint-light: #E8F5EE;
+  --hf-lavender: #C8A8D8;
+  --hf-lavender-light: #F3ECF8;
+  --hf-plum: #4A3347;
+  --hf-plum-light: #6B5068;
+  --hf-off-white: #FFFBF7;
+  --hf-yellow: #FFD966;
+  --hf-radius: 16px;
+  --hf-shadow: 0 4px 24px rgba(74, 51, 71, 0.08);
+  --hf-shadow-lg: 0 8px 40px rgba(74, 51, 71, 0.12);
+  --hf-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ===========================
+   Featured Collection (Mais Vendidos)
+   =========================== */
+.section-best_sellers .collection__title {
+  color: var(--hf-plum);
+  text-align: center;
+}
+
+.section-best_sellers .card-wrapper {
+  transition: var(--hf-transition);
+}
+
+.section-best_sellers .card-wrapper:hover {
+  transform: translateY(-4px);
+}
+
+.section-best_sellers .card {
+  border-radius: var(--hf-radius) !important;
+  overflow: hidden;
+  box-shadow: var(--hf-shadow);
+  transition: var(--hf-transition);
+}
+
+.section-best_sellers .card:hover {
+  box-shadow: var(--hf-shadow-lg);
+}
+
+/* ===========================
+   Collapsible Content (FAQ)
+   =========================== */
+.section-faqs .collapsible-content__heading {
+  color: var(--hf-plum);
+}
+
+.section-faqs .collapsible-content .accordion {
+  border-radius: var(--hf-radius);
+  overflow: hidden;
+}
+
+.section-faqs .accordion__content {
+  color: var(--hf-plum-light);
+}
+
+/* ===========================
+   Smooth scroll & general polish
+   =========================== */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Subtle section separator */
+.section-hero + .section-best_sellers,
+.section-best_sellers + .section-brand_benefits,
+.section-brand_benefits + .section-about_brand {
+  position: relative;
+}
+
+/* Float animation for decorative elements */
+@keyframes hf-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes hf-pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}

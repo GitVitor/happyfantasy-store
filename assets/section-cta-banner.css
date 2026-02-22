@@ -1,20 +1,28 @@
 /* CTA Banner */
+.cta-banner {
+  position: relative;
+  overflow: hidden;
+}
+
 .cta-banner__inner {
   text-align: center;
-  max-width: 80rem;
+  max-width: 680px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1.2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .cta-banner__subheading {
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 1.2rem;
-  opacity: 0.7;
+  letter-spacing: 0.15em;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--hf-pink, #F5B8C8);
 }
 
 .cta-banner__heading {
@@ -22,10 +30,9 @@
 }
 
 .cta-banner__text {
-  font-size: 1.6rem;
-  line-height: 1.6;
-  opacity: 0.8;
-  max-width: 60rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  max-width: 520px;
 }
 
 .cta-banner__text p {
@@ -35,12 +42,74 @@
 .cta-banner__buttons {
   display: flex;
   flex-wrap: wrap;
-  gap: 1.2rem;
+  gap: 1rem;
   justify-content: center;
-  margin-top: 0.8rem;
+  margin-top: 0.5rem;
 }
 
 .cta-banner__button {
-  min-width: 20rem;
-  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 14px 36px;
+  border-radius: 50px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: var(--hf-transition, all 0.3s cubic-bezier(0.4, 0, 0.2, 1));
+  letter-spacing: 0.02em;
+}
+
+.cta-banner__button.button--primary {
+  background: linear-gradient(135deg, #FFD966, #FFB84D);
+  color: var(--hf-plum, #4A3347) !important;
+  box-shadow: 0 4px 20px rgba(255, 217, 102, 0.4);
+}
+
+.cta-banner__button.button--primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 28px rgba(255, 217, 102, 0.55);
+  background: linear-gradient(135deg, #FFB84D, #FFD966);
+}
+
+.cta-banner__button.button--secondary {
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  color: #fff !important;
+  box-shadow: none;
+}
+
+.cta-banner__button.button--secondary:hover {
+  transform: translateY(-2px);
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* Sparkle decorations */
+.cta-banner__inner::before,
+.cta-banner__inner::after {
+  content: '✨';
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.5;
+  animation: hf-float 3s ease-in-out infinite;
+}
+
+.cta-banner__inner::before {
+  top: -10px;
+  left: -20px;
+}
+
+.cta-banner__inner::after {
+  bottom: -10px;
+  right: -20px;
+  animation-delay: 1.5s;
+}
+
+@keyframes hf-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
 }
