@@ -1,0 +1,400 @@
+{{ 'section-contact-landing.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} ===== HERO / HEADLINE ===== {%- endcomment -%}
+<section class="cl-hero">
+  <div class="cl-container cl-text-center">
+    <span class="cl-hero__badge">💬 {{ section.settings.hero_badge }}</span>
+    <h1 class="cl-hero__title">{{ section.settings.hero_title }}</h1>
+    <p class="cl-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+  </div>
+</section>
+
+{%- comment -%} ===== INTRO PARAGRAPH ===== {%- endcomment -%}
+<section class="cl-intro">
+  <div class="cl-container">
+    <div class="cl-intro__card">
+      <p class="cl-intro__text">{{ section.settings.intro_text }}</p>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ===== TRUST BADGES ===== {%- endcomment -%}
+<section class="cl-trust">
+  <div class="cl-container">
+    <div class="cl-trust__grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'trust_badge' -%}
+          <div class="cl-trust__item" {{ block.shopify_attributes }}>
+            <span class="cl-trust__icon">{{ block.settings.icon }}</span>
+            <h3 class="cl-trust__title">{{ block.settings.title }}</h3>
+            <p class="cl-trust__text">{{ block.settings.text }}</p>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ===== CONTACT FORM ===== {%- endcomment -%}
+<section class="cl-form-section">
+  <div class="cl-container">
+    <div class="cl-form-layout">
+      <div class="cl-form-info">
+        <span class="cl-section-label">{{ section.settings.form_label }}</span>
+        <h2 class="cl-section-title">{{ section.settings.form_title }}</h2>
+        <p class="cl-form-info__text">{{ section.settings.form_description }}</p>
+
+        <div class="cl-form-info__details">
+          <div class="cl-form-info__detail">
+            <span class="cl-form-info__detail-icon">⏰</span>
+            <div>
+              <strong>Horário de Atendimento</strong>
+              <p>{{ section.settings.contact_hours }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cl-form-card">
+        {%- form 'contact', id: 'ContactFormLanding', class: 'cl-form' -%}
+          {%- if form.posted_successfully? -%}
+            <div class="cl-form__success">
+              <span class="cl-form__success-icon">✅</span>
+              <h3>Mensagem Enviada com Sucesso!</h3>
+              <p>Recebemos sua mensagem e responderemos em até 24 horas. Fique de olho no seu e-mail!</p>
+            </div>
+          {%- elsif form.errors -%}
+            <div class="cl-form__error">
+              <span class="cl-form__error-icon">⚠️</span>
+              <p>Ops! Verifique os campos e tente novamente.</p>
+              <ul>
+                <li>
+                  <a href="#ContactFormLanding-email">
+                    {{ form.errors.translated_fields.email | capitalize }}
+                    {{ form.errors.messages.email }}
+                  </a>
+                </li>
+              </ul>
+            </div>
+          {%- endif -%}
+
+          <div class="cl-form__group">
+            <label class="cl-form__label" for="ContactFormLanding-name">
+              👤 Seu Nome <abbr title="obrigatório">*</abbr>
+            </label>
+            <input
+              class="cl-form__input"
+              type="text"
+              id="ContactFormLanding-name"
+              name="contact[{{ 'templates.contact.form.name' | t }}]"
+              value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+              placeholder="Como podemos te chamar?"
+              required
+              autocomplete="name"
+            >
+            <span class="cl-form__hint">Queremos te tratar pelo nome — faz toda a diferença 😊</span>
+          </div>
+
+          <div class="cl-form__group">
+            <label class="cl-form__label" for="ContactFormLanding-email">
+              📧 Seu E-mail <abbr title="obrigatório">*</abbr>
+            </label>
+            <input
+              class="cl-form__input"
+              type="email"
+              id="ContactFormLanding-email"
+              name="contact[email]"
+              value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+              placeholder="seuemail@exemplo.com"
+              required
+              autocomplete="email"
+              spellcheck="false"
+              autocapitalize="off"
+              {% if form.errors contains 'email' %}
+                aria-invalid="true"
+                aria-describedby="ContactFormLanding-email-error"
+              {% endif %}
+            >
+            <span class="cl-form__hint">Prometemos: nada de spam. Apenas a resposta que você precisa.</span>
+            {%- if form.errors contains 'email' -%}
+              <small class="cl-form__field-error" id="ContactFormLanding-email-error">
+                {{ form.errors.translated_fields.email | capitalize }}
+                {{ form.errors.messages.email }}
+              </small>
+            {%- endif -%}
+          </div>
+
+          <div class="cl-form__group">
+            <label class="cl-form__label" for="ContactFormLanding-phone">
+              📱 WhatsApp (opcional)
+            </label>
+            <input
+              class="cl-form__input"
+              type="tel"
+              id="ContactFormLanding-phone"
+              name="contact[{{ 'templates.contact.form.phone' | t }}]"
+              value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+              placeholder="(11) 99999-9999"
+              autocomplete="tel"
+            >
+            <span class="cl-form__hint">Se preferir, podemos responder por WhatsApp também!</span>
+          </div>
+
+          <div class="cl-form__group">
+            <label class="cl-form__label" for="ContactFormLanding-subject">
+              📋 Assunto <abbr title="obrigatório">*</abbr>
+            </label>
+            <select
+              class="cl-form__input cl-form__select"
+              id="ContactFormLanding-subject"
+              name="contact[Assunto]"
+              required
+            >
+              <option value="" disabled selected>Escolha o assunto da sua mensagem</option>
+              <option value="Dúvida sobre o produto">Dúvida sobre o produto</option>
+              <option value="Problema com meu pedido">Problema com meu pedido</option>
+              <option value="Personalização do vídeo">Personalização do vídeo</option>
+              <option value="Pagamento e reembolso">Pagamento e reembolso</option>
+              <option value="Sugestão ou elogio">Sugestão ou elogio</option>
+              <option value="Outro assunto">Outro assunto</option>
+            </select>
+          </div>
+
+          <div class="cl-form__group cl-form__group--full">
+            <label class="cl-form__label" for="ContactFormLanding-body">
+              ✍️ Sua Mensagem <abbr title="obrigatório">*</abbr>
+            </label>
+            <textarea
+              class="cl-form__input cl-form__textarea"
+              id="ContactFormLanding-body"
+              name="contact[{{ 'templates.contact.form.comment' | t }}]"
+              rows="6"
+              placeholder="Conte-nos como podemos te ajudar. Quanto mais detalhes, mais rápido resolvemos!"
+              required
+            >{{ form.body }}</textarea>
+            <span class="cl-form__hint">Ficou com vergonha? Não fique! Adoramos ouvir nossos clientes 💜</span>
+          </div>
+
+          <div class="cl-form__footer">
+            <button type="submit" class="cl-form__submit">
+              Enviar Mensagem 💌
+            </button>
+            <p class="cl-form__privacy">
+              🔒 Seus dados estão protegidos. Não compartilhamos suas informações com terceiros.
+            </p>
+          </div>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ===== FAQ ===== {%- endcomment -%}
+<section class="cl-faq">
+  <div class="cl-container">
+    <span class="cl-section-label cl-text-center">{{ section.settings.faq_label }}</span>
+    <h2 class="cl-section-title cl-text-center">{{ section.settings.faq_title }}</h2>
+
+    <div class="cl-faq__list">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'faq' -%}
+          <details class="cl-faq__item" {{ block.shopify_attributes }}>
+            <summary class="cl-faq__question">
+              <span>{{ block.settings.question }}</span>
+              <svg class="cl-faq__chevron" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </summary>
+            <div class="cl-faq__answer">
+              <p>{{ block.settings.answer }}</p>
+            </div>
+          </details>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{%- comment -%} ===== CTA FINAL ===== {%- endcomment -%}
+<section class="cl-cta">
+  <div class="cl-container cl-text-center">
+    <span class="cl-cta__icon">💜</span>
+    <h2 class="cl-cta__title">{{ section.settings.cta_title }}</h2>
+    <p class="cl-cta__text">{{ section.settings.cta_text }}</p>
+    <a href="#ContactFormLanding-name" class="cl-cta__button">{{ section.settings.cta_button }}</a>
+    <p class="cl-cta__footer">{{ section.settings.cta_footer }}</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contato Landing",
+  "tag": "div",
+  "class": "cl-page",
+  "settings": [
+    {
+      "type": "header",
+      "content": "🌟 Hero"
+    },
+    {
+      "type": "text",
+      "id": "hero_badge",
+      "label": "Badge",
+      "default": "Fale Conosco"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "hero_title",
+      "label": "Título",
+      "default": "Estamos Aqui Para <em>Você</em> 💜"
+    },
+    {
+      "type": "text",
+      "id": "hero_subtitle",
+      "label": "Subtítulo",
+      "default": "Sua dúvida é importante para nós. Responderemos com carinho e agilidade — prometemos!"
+    },
+    {
+      "type": "header",
+      "content": "📝 Introdução"
+    },
+    {
+      "type": "textarea",
+      "id": "intro_text",
+      "label": "Texto de introdução",
+      "default": "Sabemos que confiar em uma loja online exige segurança e transparência. Por isso, cada mensagem que recebemos é tratada com atenção, respeito e sigilo. Não importa se é uma dúvida simples ou algo mais complexo — estamos prontos para ajudar. Nosso compromisso é responder em até 24 horas, porque acreditamos que você merece atenção rápida e de qualidade."
+    },
+    {
+      "type": "header",
+      "content": "📬 Formulário"
+    },
+    {
+      "type": "text",
+      "id": "form_label",
+      "label": "Label",
+      "default": "Entre em Contato"
+    },
+    {
+      "type": "text",
+      "id": "form_title",
+      "label": "Título",
+      "default": "Mande Sua Mensagem ✉️"
+    },
+    {
+      "type": "textarea",
+      "id": "form_description",
+      "label": "Descrição",
+      "default": "Preencha o formulário abaixo e nossa equipe entrará em contato o mais rápido possível. Todos os campos marcados com * são obrigatórios."
+    },
+    {
+      "type": "text",
+      "id": "contact_hours",
+      "label": "Horário de atendimento",
+      "default": "Seg à Sex, 9h às 18h"
+    },
+    {
+      "type": "header",
+      "content": "❓ Perguntas Frequentes"
+    },
+    {
+      "type": "text",
+      "id": "faq_label",
+      "label": "Label",
+      "default": "Dúvidas Comuns"
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "Título",
+      "default": "Talvez Já Tenhamos a Resposta 🤔"
+    },
+    {
+      "type": "header",
+      "content": "💜 CTA Final"
+    },
+    {
+      "type": "text",
+      "id": "cta_title",
+      "label": "Título",
+      "default": "Ainda Com Dúvidas?"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Texto",
+      "default": "Não hesite em nos escrever. Cada mensagem é lida com atenção e respondida com carinho. Sua satisfação é o que nos move."
+    },
+    {
+      "type": "text",
+      "id": "cta_button",
+      "label": "Texto do botão",
+      "default": "Enviar Mensagem Agora 💌"
+    },
+    {
+      "type": "text",
+      "id": "cta_footer",
+      "label": "Texto do rodapé",
+      "default": "🔒 Seus dados estão seguros conosco. Utilizamos criptografia SSL e seguimos a LGPD."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "trust_badge",
+      "name": "Selo de Confiança",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji ícone",
+          "default": "🔒"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Título",
+          "default": "Dados Protegidos"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Texto",
+          "default": "Criptografia SSL e conformidade com a LGPD."
+        }
+      ]
+    },
+    {
+      "type": "faq",
+      "name": "Pergunta FAQ",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Pergunta",
+          "default": "Como funciona a personalização?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Resposta",
+          "default": "Basta preencher o nome da criança e a mensagem especial no momento da compra!"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Contato Landing Page",
+      "blocks": [
+        { "type": "trust_badge", "settings": { "icon": "🔒", "title": "Dados 100% Protegidos", "text": "Conexão segura com criptografia SSL. Suas informações pessoais estão em boas mãos." } },
+        { "type": "trust_badge", "settings": { "icon": "⚡", "title": "Resposta em até 24h", "text": "Recebeu? Respondemos! Nosso time se dedica a resolver tudo no menor tempo possível." } },
+        { "type": "trust_badge", "settings": { "icon": "💜", "title": "Atendimento Humanizado", "text": "Nada de robôs genéricos. Aqui você fala com pessoas reais que se importam de verdade." } },
+        { "type": "trust_badge", "settings": { "icon": "✅", "title": "Satisfação Garantida", "text": "Não ficou feliz? A gente resolve. Seu sorriso (e o da criança) é nossa prioridade nº 1." } },
+        { "type": "faq", "settings": { "question": "Em quanto tempo recebo resposta?", "answer": "Nosso compromisso é responder todas as mensagens em até 24 horas úteis. Na maioria dos casos, respondemos muito antes disso! Se for urgente, envie também uma mensagem pelo WhatsApp." } },
+        { "type": "faq", "settings": { "question": "Posso alterar ou cancelar meu pedido?", "answer": "Sim! Se o vídeo ainda não foi produzido, podemos alterar os dados de personalização ou cancelar com reembolso total. Basta entrar em contato o mais rápido possível após a compra." } },
+        { "type": "faq", "settings": { "question": "Como funciona o reembolso?", "answer": "Se por qualquer motivo você não estiver satisfeito, oferecemos reembolso integral em até 7 dias após a compra. Basta nos enviar uma mensagem explicando o ocorrido e resolveremos rapidamente." } },
+        { "type": "faq", "settings": { "question": "Meus dados estão seguros?", "answer": "Absolutamente! Utilizamos criptografia SSL em todo o site e seguimos rigorosamente a LGPD (Lei Geral de Proteção de Dados). Seus dados nunca serão compartilhados com terceiros." } },
+        { "type": "faq", "settings": { "question": "Posso entrar em contato pelo WhatsApp?", "answer": "Claro! Nosso WhatsApp está disponível de segunda a sexta, das 9h às 18h. Fora desse horário, deixe sua mensagem pelo formulário que responderemos no próximo dia útil." } },
+        { "type": "faq", "settings": { "question": "E se eu tiver um problema técnico com o vídeo?", "answer": "Problemas acontecem e estamos preparados! Se o vídeo apresentar qualquer falha técnica, produziremos um novo sem custo adicional. Basta nos enviar os detalhes do problema." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

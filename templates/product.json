@@ -17,8 +17,8 @@
           "settings": {
             "icon": "⚡",
             "color": "pink",
-            "title": "Entrega Imediata",
-            "text": "Receba em minutos no seu e-mail"
+            "title": "Entrega em até 4 horas",
+            "text": "Receba em minutos no seu WhatsApp"
           }
         },
         "benefit_2": {
@@ -60,8 +60,8 @@
           "type": "step",
           "settings": {
             "icon": "✨",
-            "title": "Receba por E-mail",
-            "text": "Em poucos minutos, o vídeo personalizado chega no seu e-mail, prontinho!"
+            "title": "Receba por WhatsApp",
+            "text": "Em até 4 horas, o vídeo personalizado chega no seu WhatsApp, prontinho!"
           }
         },
         "step_3": {
@@ -107,7 +107,7 @@
           "type": "faq",
           "settings": {
             "question": "Quanto tempo leva para receber?",
-            "answer": "O vídeo personalizado é entregue em poucos minutos após a confirmação do pagamento. Você recebe um link de download diretamente no seu e-mail."
+            "answer": "O vídeo personalizado é entregue em poucos minutos após a confirmação do pagamento. Você recebe um link de download diretamente no seu WhatsApp."
           }
         },
         "faq_3": {
@@ -163,7 +163,7 @@
         "hero_subtitle": "Surpreenda com um vídeo encantador com o nome da criança! O Coelhinho da Páscoa fala diretamente com ela — pura emoção em família.",
         "hero_price_note": "🎉 Lançamento Especial",
         "hero_cta_text": "Quero Surpreender Agora! 🐣",
-        "hero_trust_text": "Pagamento 100% seguro • Entrega imediata por e-mail",
+        "hero_trust_text": "Pagamento 100% seguro • Entrega em até 4 horas por WhatsApp",
         "hero_media_tag": "Preview do vídeo",
         "steps_label": "Simples e Rápido",
         "steps_title": "Como Funciona?",
