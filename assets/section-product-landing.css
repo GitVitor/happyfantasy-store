@@ -184,6 +184,20 @@
   align-items: center;
 }
 
+/* Mobile: flatten content so children can reorder alongside media */
+@media (max-width: 749px) {
+  .pl-hero__content {
+    display: contents;
+  }
+
+  .pl-hero__title { order: 1; }
+  .pl-hero__subtitle { order: 2; }
+  .pl-hero__price-row { order: 3; }
+  .pl-hero__media { order: 4; }
+  .pl-hero__actions { order: 5; }
+  .pl-hero__trust { order: 6; }
+}
+
 .pl-hero__badge {
   display: inline-flex;
   align-items: center;
