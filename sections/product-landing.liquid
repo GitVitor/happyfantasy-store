@@ -1,17 +1,16 @@
 {{ 'section-product-landing.css' | asset_url | stylesheet_tag }}
 
 <div class="product-landing">
-
   {%- comment -%} ===== HERO SECTION ===== {%- endcomment -%}
   <section class="pl-hero">
     <div class="pl-container">
       <div class="pl-hero__grid">
         <div class="pl-hero__content">
           {%- comment -%}
-          <div class="pl-hero__badge pl-float">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
-            {{ section.settings.hero_badge }}
-          </div>
+            <div class="pl-hero__badge pl-float">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+              {{ section.settings.hero_badge }}
+            </div>
           {%- endcomment -%}
 
           <h1 class="pl-hero__title">{{ section.settings.hero_title }}</h1>
@@ -26,75 +25,28 @@
           </div>
 
           <div class="pl-hero__actions">
-            {%- form 'product', product, id: 'pl-form-hero' -%}
-              <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-
-              {%- comment -%} ===== PERSONALIZAÇÃO ===== {%- endcomment -%}
-              <div class="pl-personalize" id="pl-personalize">
-                <div class="pl-personalize__header">
-                  <span class="pl-personalize__icon">🎨</span>
-                  <h3 class="pl-personalize__title">Personalize Seu Vídeo ✨</h3>
-                  <p class="pl-personalize__subtitle">Preencha os dados para criar a magia!</p>
-                </div>
-
-                <div class="pl-personalize__fields">
-                  <div class="pl-personalize__field">
-                    <label for="pl-child-name">
-                      🧒 Nome da Criança <abbr title="obrigatório">*</abbr>
-                    </label>
-                    <input
-                      type="text"
-                      id="pl-child-name"
-                      name="properties[Nome da Criança]"
-                      placeholder="Ex: Sofia"
-                      required
-                      autocomplete="off"
-                      maxlength="40"
-                    >
-                  </div>
-
-                  <div class="pl-personalize__field">
-                    <label for="pl-flavor">
-                      🍫 Sabor Favorito do Ovo <abbr title="obrigatório">*</abbr>
-                    </label>
-                    <input
-                      type="text"
-                      id="pl-flavor"
-                      name="properties[Sabor Favorito]"
-                      placeholder="Ex: Chocolate ao Leite"
-                      required
-                      autocomplete="off"
-                      maxlength="50"
-                    >
-                  </div>
-
-                  <div class="pl-personalize__field">
-                    <label for="pl-whatsapp">
-                      📱 WhatsApp para Entrega <abbr title="obrigatório">*</abbr>
-                    </label>
-                    <input
-                      type="tel"
-                      id="pl-whatsapp"
-                      name="properties[WhatsApp]"
-                      placeholder="(11) 99999-9999"
-                      required
-                      autocomplete="tel"
-                      maxlength="20"
-                      pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}"
-                    >
-                  </div>
-                </div>
-              </div>
-
-              <button type="submit" class="pl-btn pl-btn--lg" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+            <modal-opener data-modal="#PlPersonalizeModal">
+              <button type="button" class="pl-btn pl-btn--lg" id="pl-modal-open-btn">
                 <span>{{ section.settings.hero_cta_text }}</span>
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
               </button>
-            {%- endform -%}
+            </modal-opener>
           </div>
 
           <div class="pl-hero__trust">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+            </svg>
             <span>{{ section.settings.hero_trust_text }}</span>
           </div>
         </div>
@@ -106,16 +58,31 @@
               {%- if hero_media.media_type == 'video' or hero_media.media_type == 'external_video' -%}
                 {{ hero_media | media_tag: autoplay: false, controls: true }}
               {%- else -%}
-                {{ hero_media | image_url: width: 800 | image_tag:
-                  loading: 'eager',
-                  widths: '400, 600, 800',
-                  sizes: '(min-width: 750px) 50vw, 100vw'
+                {{
+                  hero_media
+                  | image_url: width: 800
+                  | image_tag: loading: 'eager', widths: '400, 600, 800', sizes: '(min-width: 750px) 50vw, 100vw'
                 }}
               {%- endif -%}
             {%- else -%}
               {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
-            <span class="pl-hero__media-tag">🐰 {{ section.settings.hero_media_tag }}</span>
+
+            {%- comment -%} Fake player poster overlay {%- endcomment -%}
+            <div class="pl-video-poster" data-video-poster>
+              <img
+                src="{{ 'main-characters.jpeg' | asset_url }}"
+                alt="{{ product.title }}"
+                loading="eager"
+                width="360"
+                height="640"
+              >
+              <button class="pl-video-poster__play" aria-label="Reproduzir vídeo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                  <polygon points="5,3 19,12 5,21"/>
+                </svg>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -181,15 +148,31 @@
             {%- if preview_media.media_type == 'video' or preview_media.media_type == 'external_video' -%}
               {{ preview_media | media_tag: autoplay: false, controls: true }}
             {%- else -%}
-              {{ preview_media | image_url: width: 900 | image_tag:
-                loading: 'lazy',
-                widths: '400, 600, 900',
-                sizes: '(min-width: 750px) 720px, 100vw'
+              {{
+                preview_media
+                | image_url: width: 900
+                | image_tag: loading: 'lazy', widths: '400, 600, 900', sizes: '(min-width: 750px) 720px, 100vw'
               }}
             {%- endif -%}
           {%- else -%}
             {{ 'product-2' | placeholder_svg_tag: 'placeholder-svg' }}
           {%- endif -%}
+
+          {%- comment -%} Fake player poster overlay {%- endcomment -%}
+          <div class="pl-video-poster" data-video-poster>
+            <img
+              src="{{ 'main-characters.jpeg' | asset_url }}"
+              alt="{{ product.title }}"
+              loading="lazy"
+              width="360"
+              height="640"
+            >
+            <button class="pl-video-poster__play" aria-label="Reproduzir vídeo">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                <polygon points="5,3 19,12 5,21"/>
+              </svg>
+            </button>
+          </div>
         </div>
         <p class="pl-preview__caption">{{ section.settings.preview_caption }}</p>
       </div>
@@ -234,7 +217,17 @@
             <details class="pl-faq-item" {{ block.shopify_attributes }}>
               <summary class="pl-faq-item__question">
                 {{ block.settings.question }}
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.5"
+                  stroke-linecap="round"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
               </summary>
               <div class="pl-faq-item__answer">
                 <p>{{ block.settings.answer }}</p>
@@ -254,7 +247,9 @@
       <p class="pl-urgency__subtitle">{{ section.settings.urgency_text }}</p>
 
       <div class="pl-urgency__countdown pl-pulse">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
         {{ section.settings.urgency_countdown_text }}
       </div>
 
@@ -263,19 +258,130 @@
         <input type="hidden" name="properties[Nome da Criança]" id="pl-urgency-name" value="">
         <input type="hidden" name="properties[Sabor Favorito]" id="pl-urgency-flavor" value="">
         <input type="hidden" name="properties[WhatsApp]" id="pl-urgency-whatsapp" value="">
-        <button type="submit" class="pl-btn pl-btn--lg" {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}>
+        <button
+          type="submit"
+          class="pl-btn pl-btn--lg"
+          {% unless product.selected_or_first_available_variant.available %}
+            disabled
+          {% endunless %}
+        >
           <span>{{ section.settings.urgency_cta_text }}</span>
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
         </button>
       {%- endform -%}
 
       <p class="pl-urgency__guarantee">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
         {{ section.settings.urgency_guarantee }}
       </p>
     </div>
   </section>
 
+  {%- comment -%} ===== PERSONALIZE MODAL ===== {%- endcomment -%}
+  <pl-personalize-modal id="PlPersonalizeModal" class="pl-modal">
+    <div class="pl-modal__content" role="dialog" aria-modal="true" aria-label="Personalizar Vídeo">
+      <button id="ModalClose-PlPersonalize" class="pl-modal__close" aria-label="Fechar">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2.5"
+          stroke-linecap="round"
+        >
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      {%- form 'product', product, id: 'pl-form-hero' -%}
+        <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+        <div class="pl-personalize" id="pl-personalize">
+          <div class="pl-personalize__header">
+            <span class="pl-personalize__icon">🎨</span>
+            <h3 class="pl-personalize__title">Personalize Seu Vídeo ✨</h3>
+            <p class="pl-personalize__subtitle">Preencha os dados para criar a magia!</p>
+          </div>
+
+          <div class="pl-personalize__fields">
+            <div class="pl-personalize__field">
+              <label for="pl-child-name"> 🧒 Nome da Criança <abbr title="obrigatório">*</abbr> </label>
+              <input
+                type="text"
+                id="pl-child-name"
+                name="properties[Nome da Criança]"
+                placeholder="Ex: Sofia"
+                required
+                autocomplete="off"
+                maxlength="40"
+              >
+            </div>
+
+            <div class="pl-personalize__field">
+              <label for="pl-flavor"> 🍫 Sabor Favorito do Ovo <abbr title="obrigatório">*</abbr> </label>
+              <input
+                type="text"
+                id="pl-flavor"
+                name="properties[Sabor Favorito]"
+                placeholder="Ex: Chocolate ao Leite"
+                required
+                autocomplete="off"
+                maxlength="50"
+              >
+            </div>
+
+            <div class="pl-personalize__field">
+              <label for="pl-whatsapp"> 📱 WhatsApp para Entrega <abbr title="obrigatório">*</abbr> </label>
+              <input
+                type="tel"
+                id="pl-whatsapp"
+                name="properties[WhatsApp]"
+                placeholder="(11) 99999-9999"
+                required
+                autocomplete="tel"
+                maxlength="20"
+                pattern="\(?\d{2}\)?\s?\d{4,5}-?\d{4}"
+              >
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="pl-btn pl-btn--lg"
+          {% unless product.selected_or_first_available_variant.available %}
+            disabled
+          {% endunless %}
+        >
+          <span>{{ section.settings.hero_cta_text }}</span>
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      {%- endform -%}
+    </div>
+  </pl-personalize-modal>
 </div>
 
 <style>
@@ -295,21 +401,21 @@
   }
 
   .pl-personalize__icon {
-    font-size: 2rem;
+    font-size: 64px;
     display: block;
     margin-bottom: 0.3rem;
   }
 
   .pl-personalize__title {
-    font-size: 1.15rem;
+    font-size: 14px;
     font-weight: 800;
-    color: #4A3347;
+    color: #4a3347;
     margin: 0 0 0.3rem;
   }
 
   .pl-personalize__subtitle {
-    font-size: 0.85rem;
-    color: #6B5068;
+    font-size: 18px;
+    color: #6b5068;
     margin: 0;
   }
 
@@ -323,7 +429,7 @@
     display: block;
     font-size: 0.85rem;
     font-weight: 700;
-    color: #4A3347;
+    color: #4a3347;
     margin-bottom: 0.4rem;
   }
 
@@ -341,7 +447,7 @@
     border-radius: 12px;
     font-size: 0.95rem;
     font-family: inherit;
-    color: #4A3347;
+    color: #4a3347;
     background: #fff;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     -webkit-appearance: none;
@@ -359,7 +465,7 @@
   .pl-personalize__field input:focus,
   .pl-personalize__field select:focus {
     outline: none;
-    border-color: #C8A8D8;
+    border-color: #c8a8d8;
     box-shadow: 0 0 0 3px rgba(200, 168, 216, 0.25);
   }
 
@@ -372,7 +478,7 @@
   }
 
   .pl-personalize__field input:valid:not(:placeholder-shown) {
-    border-color: #A8D5BA;
+    border-color: #a8d5ba;
   }
 
   @media screen and (min-width: 750px) {
@@ -380,19 +486,160 @@
       padding: 1.8rem 2rem;
     }
   }
+
+  /* ===== Personalize Modal ===== */
+  .pl-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.5);
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+
+  .pl-modal[open] {
+    opacity: 1;
+    visibility: visible;
+    z-index: 101;
+  }
+
+  /* Phase 9: Full-screen on mobile */
+  .pl-modal__content {
+    background: #fff;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    position: relative;
+    box-sizing: border-box;
+  }
+
+  .pl-modal__close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: background 0.2s ease;
+    color: #4a3347;
+  }
+
+  .pl-modal__close:hover {
+    background: rgba(0, 0, 0, 0.12);
+  }
+
+  .pl-modal .pl-personalize {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .pl-modal .pl-personalize__header {
+    margin-top: 2rem;
+  }
+
+  .pl-modal .pl-btn--lg {
+    width: 100%;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #a8d5ba, #7ec4a0);
+    box-shadow: 0 4px 20px rgba(126, 196, 160, 0.4);
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.25rem;
+    padding: 18px 48px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .pl-modal .pl-btn--lg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #7ec4a0, #a8d5ba);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+  }
+
+  .pl-modal .pl-btn--lg:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(126, 196, 160, 0.55);
+  }
+
+  .pl-modal .pl-btn--lg:hover::after {
+    opacity: 1;
+  }
+
+  .pl-modal .pl-btn--lg span,
+  .pl-modal .pl-btn--lg svg {
+    position: relative;
+    z-index: 1;
+  }
+
+  .pl-modal__content {
+    font-size: 16px;
+  }
+
+  .pl-modal .pl-personalize__field label {
+    font-size: 16px;
+  }
+
+  /* Desktop: centered dialog */
+  @media screen and (min-width: 750px) {
+    .pl-modal {
+      align-items: center;
+    }
+
+    .pl-modal__content {
+      width: 480px;
+      max-width: 90vw;
+      height: auto;
+      max-height: 90vh;
+      border-radius: 20px;
+      padding: 2rem;
+    }
+  }
 </style>
 
 <script>
-  (function() {
+  (function () {
     /* WhatsApp mask: (XX) XXXXX-XXXX */
     const whatsInput = document.getElementById('pl-whatsapp');
     if (whatsInput) {
-      whatsInput.addEventListener('input', function(e) {
+      whatsInput.addEventListener('input', function (e) {
         let v = e.target.value.replace(/\D/g, '').slice(0, 11);
         if (v.length > 6) {
-          v = '(' + v.slice(0,2) + ') ' + v.slice(2,7) + '-' + v.slice(7);
+          v = '(' + v.slice(0, 2) + ') ' + v.slice(2, 7) + '-' + v.slice(7);
         } else if (v.length > 2) {
-          v = '(' + v.slice(0,2) + ') ' + v.slice(2);
+          v = '(' + v.slice(0, 2) + ') ' + v.slice(2);
         } else if (v.length > 0) {
           v = '(' + v;
         }
@@ -417,25 +664,57 @@
     if (flavorInput) flavorInput.addEventListener('input', syncFields);
     if (whatsInput) whatsInput.addEventListener('input', syncFields);
 
-    /* Validate urgency form: scroll to personalize if fields empty */
+    /* Validate urgency form: open modal if fields empty */
     const urgForm = document.getElementById('pl-form-urgency');
     if (urgForm) {
-      urgForm.addEventListener('submit', function(e) {
+      const urgSubmitBtn = urgForm.querySelector('button[type="submit"]');
+      urgForm.addEventListener('submit', function (e) {
         if (!nameInput.value || !flavorInput.value || !whatsInput.value) {
           e.preventDefault();
-          const section = document.getElementById('pl-personalize');
-          if (section) {
-            section.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            /* Focus first empty field */
-            if (!nameInput.value) nameInput.focus();
-            else if (!flavorInput.value) flavorInput.focus();
-            else whatsInput.focus();
-          }
+          const modal = document.querySelector('#PlPersonalizeModal');
+          if (modal) modal.show(urgSubmitBtn);
         } else {
           syncFields();
         }
       });
     }
+  })();
+
+  /* ===== PlPersonalizeModal: extends ModalDialog (defined in global.js) ===== */
+  document.addEventListener('DOMContentLoaded', function () {
+    class PlPersonalizeModal extends ModalDialog {
+      constructor() {
+        super();
+      }
+
+      show(opener) {
+        super.show(opener);
+        /* Phase 6: Focus first non-filled required field (deferred to allow CSS visibility transition to apply) */
+        setTimeout(() => {
+          const firstEmpty = [...this.querySelectorAll('input[required]')].find(function (input) {
+            return !input.value.trim();
+          });
+          if (firstEmpty) {
+            firstEmpty.focus();
+          }
+        }, 50);
+      }
+    }
+    customElements.define('pl-personalize-modal', PlPersonalizeModal);
+  });
+
+  /* ---------- Fake video poster: click to reveal & play real video ---------- */
+  (function () {
+    document.querySelectorAll('[data-video-poster]').forEach(function (poster) {
+      poster.addEventListener('click', function () {
+        var wrapper = poster.parentElement;
+        var video = wrapper.querySelector('video');
+        poster.classList.add('is-hidden');
+        if (video) {
+          video.play();
+        }
+      });
+    });
   })();
 </script>
 
@@ -477,7 +756,7 @@
       "type": "text",
       "id": "hero_cta_text",
       "label": "Texto botão CTA",
-      "default": "Quero Surpreender Agora! 🐣"
+      "default": "Quero Surpreender Agora!"
     },
     {
       "type": "text",
@@ -712,9 +991,7 @@
       ]
     }
   ],
-  "templates": [
-    "product"
-  ],
+  "templates": ["product"],
   "presets": [
     {
       "name": "Produto Landing Page"
